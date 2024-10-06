@@ -1,5 +1,6 @@
 vim.api.nvim_exec('language en_US', true)
 
+require("config.options")
 require("config.lazy")
 
 require("nvim-tree").setup()
