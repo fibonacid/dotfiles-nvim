@@ -5,16 +5,11 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    -- import lspconfig plugin
     local lspconfig = require("lspconfig")
-
-    -- import mason_lspconfig plugin
     local mason_lspconfig = require("mason-lspconfig")
-
-    -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
-    
-     -- used to enable autocompletion (assign to every lsp server config)
+
+    -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     mason_lspconfig.setup_handlers({
@@ -23,7 +18,24 @@ return {
         lspconfig[server_name].setup({
           capabilities = capabilities,
         })
-      end
+      end,
+      ["lua_ls"] = function()
+        -- configure lua server (with special settings)
+        lspconfig["lua_ls"].setup({
+          capabilities = capabilities,
+          settings = {
+            Lua = {
+              -- make the language server recognize "vim" global
+              diagnostics = {
+                globals = { "vim" },
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
+            },
+          },
+        })
+      end,
     })
   end
 }
