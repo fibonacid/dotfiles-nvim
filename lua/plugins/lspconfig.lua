@@ -25,6 +25,9 @@ return {
 				-- See `:help vim.lsp.*` for documentation on any of the below functions
 				local opts = { buffer = ev.buf, silent = true }
 
+				-- Enable inlay hints
+				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+
 				-- set keybinds
 				opts.desc = "Show LSP references"
 				keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
