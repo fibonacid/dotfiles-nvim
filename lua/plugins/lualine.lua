@@ -4,14 +4,12 @@ return {
 	config = function()
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
-
-		--
-		local custom_gruvbox = require("lualine.themes.tokyonight-moon")
+		local tokyonight_moon = require("lualine.themes.tokyonight-moon")
 
 		-- configure lualine with modified theme
 		lualine.setup({
 			options = {
-				theme = custom_gruvbox,
+				theme = tokyonight_moon,
 			},
 			sections = {
 				lualine_x = {
