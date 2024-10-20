@@ -108,17 +108,15 @@ return {
 					capabilities = capabilities,
 					settings = {
 						typescript = {
-							settings = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-									includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-									includeInlayEnumMemberValueHints = true,
-								},
+							inlayHints = {
+								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
 							},
 						},
 						javascript = {
