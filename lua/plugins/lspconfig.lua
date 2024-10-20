@@ -106,33 +106,25 @@ return {
 				})
 			end,
 			["ts_ls"] = function()
+				local inlayHints = {
+					includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayVariableTypeHints = false,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayEnumMemberValueHints = true,
+				}
 				-- configure ts server
 				lspconfig["ts_ls"].setup({
 					capabilities = capabilities,
 					settings = {
 						typescript = {
-							inlayHints = {
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
+							inlayHints = inlayHints,
 						},
 						javascript = {
-							inlayHints = {
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayVariableTypeHints = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayEnumMemberValueHints = true,
-							},
+							inlayHints = inlayHints,
 						},
 					},
 				})
