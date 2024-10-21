@@ -8,6 +8,8 @@ return {
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"marilari88/neotest-vitest",
+			"nvim-telescope/telescope.nvim",
+			"thenbe/neotest-playwright",
 		},
 		config = function()
 			vim.api.nvim_set_keymap(
@@ -35,6 +37,12 @@ return {
 						filter_dir = function(name)
 							return name ~= "node_modules"
 						end,
+					}),
+					require("neotest-playwright").adapter({
+						options = {
+							persist_project_selection = true,
+							enable_dynamic_test_discovery = true,
+						},
 					}),
 				},
 			})
