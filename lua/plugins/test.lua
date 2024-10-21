@@ -19,7 +19,7 @@ return {
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>twf",
-				"<cmd>lua require('neotest').run.run({ vim.fn.expand('%'), vitestCommand = 'vitest --watch' })<cr>",
+				"<cmd>lua require('neotest').run.run({ vim.fn.expand('%') })<cr>",
 				{ desc = "Run Watch File" }
 			)
 			require("neotest").setup({
