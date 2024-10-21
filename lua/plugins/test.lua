@@ -12,15 +12,21 @@ return {
 		config = function()
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>twr",
+				"<leader>ttr",
 				"<cmd>lua require('neotest').run.run()<cr>",
-				{ desc = "Run Watch" }
+				{ desc = "Run Test" }
 			)
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>twf",
+				"<leader>ttf",
 				"<cmd>lua require('neotest').run.run({ vim.fn.expand('%') })<cr>",
-				{ desc = "Run Watch File" }
+				{ desc = "Run All Tests" }
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>tts",
+				"<cmd>lua require('neotest').summary.open()<cr>",
+				{ desc = "Open Test Summary" }
 			)
 			require("neotest").setup({
 				adapters = {
