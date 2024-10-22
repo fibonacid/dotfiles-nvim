@@ -27,8 +27,8 @@ return {
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>tts",
-				"<cmd>lua require('neotest').summary.open()<cr>",
-				{ desc = "Open Test Summary" }
+				"<cmd>lua require('neotest').summary.toggle()<cr>",
+				{ desc = "Toggle Test Summary" }
 			)
 			require("neotest").setup({
 				adapters = {
