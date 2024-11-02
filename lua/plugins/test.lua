@@ -30,6 +30,18 @@ return {
 				"<cmd>lua require('neotest').summary.toggle()<cr>",
 				{ desc = "Toggle Test Summary" }
 			)
+
+			vim.api.nvim_create_autocmd({ "FileType", "WinEnter", "WinLeave" }, {
+				pattern = "neotest-summary",
+				callback = function()
+					vim.cmd("setlocal winhighlight=Normal:NormalFloat")
+				end,
+			})
+
+			-- Customize `NormalFloat` highlight for transparency
+			vim.cmd([[
+				highlight NormalFloat guibg=NONE
+			]])
 			require("neotest").setup({
 				adapters = {
 					require("neotest-vitest")({
