@@ -25,6 +25,26 @@ return {
 				-- See `:help vim.lsp.*` for documentation on any of the below functions
 				local opts = { buffer = ev.buf, silent = true }
 
+				-- Get the client object for the current buffer
+				local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+				-- Add custom commands for ts_ls
+				if client and client.name == "ts_ls" then
+					local function organize_imports()
+						local params = {
+							command = "_typescript.organizeImports",
+							arguments = { vim.api.nvim_buf_get_name(0) },
+							title = "",
+						}
+						-- vim.lsp.buf.execute_command(params)
+						client.request("workspace/executeCommand", params)
+					end
+					vim.api.nvim_create_user_command("OrganizeImports", organize_imports, { desc = "Organize Imports" })
+
+					opts.desc = "Organize Imports"
+					keymap.set("n", "<leader>oi", ":OrganizeImports<CR>", opts) -- organize imports
+				end
+
 				-- Enable inlay hints
 				vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 
@@ -121,10 +141,10 @@ return {
 					capabilities = capabilities,
 					settings = {
 						typescript = {
-							inlayHints = inlayHints,
+							inlayHints,
 						},
 						javascript = {
-							inlayHints = inlayHints,
+							inlayHints,
 						},
 					},
 				})
