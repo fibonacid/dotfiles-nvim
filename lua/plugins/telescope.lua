@@ -33,5 +33,16 @@ return {
 		keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 		keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find buffers" })
+
+		keymap.set("n", "<leader>fgf", "<cmd>Telescope git_files<cr>", { desc = "Fuzzy find git files" })
+		keymap.set("n", "<leader>fgc", "<cmd>Telescope git_commits<cr>", { desc = "Fuzzy find git commits" })
+		keymap.set("n", "<leader>fgb", "<cmd>Telescope git_branches<cr>", { desc = "Fuzzy find git branches" })
+		keymap.set("n", "<leader>fgs", "<cmd>Telescope git_status<cr>", { desc = "Fuzzy find git status" })
+		keymap.set(
+			"n",
+			"<leader>fgb",
+			"<cmd>Telescope git_bcommits<cr>",
+			{ desc = "Fuzzy find git commits for buffer" }
+		)
 	end,
 }
