@@ -38,10 +38,6 @@ return {
 				end,
 			})
 
-			-- Customize `NormalFloat` highlight for transparency
-			vim.cmd([[
-				highlight NormalFloat guibg=NONE
-			]])
 			require("neotest").setup({
 				adapters = {
 					require("neotest-vitest")({
