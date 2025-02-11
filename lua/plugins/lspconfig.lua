@@ -142,15 +142,21 @@ return {
 					includeInlayFunctionLikeReturnTypeHints = true,
 					includeInlayEnumMemberValueHints = true,
 				}
+				local preferences = {
+					importModuleSpecifierPreference = "relative",
+					importModuleSpecifierEnding = "minimal",
+				}
 				-- configure ts server
 				lspconfig["ts_ls"].setup({
 					capabilities = capabilities,
 					settings = {
 						typescript = {
 							inlayHints,
+							preferences,
 						},
 						javascript = {
 							inlayHints,
+							preferences,
 						},
 					},
 				})
