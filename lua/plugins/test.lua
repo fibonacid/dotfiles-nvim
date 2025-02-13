@@ -10,6 +10,7 @@ return {
 			"marilari88/neotest-vitest",
 			"nvim-telescope/telescope.nvim",
 			"thenbe/neotest-playwright",
+			"nvim-neotest/neotest-jest",
 		},
 		config = function()
 			vim.api.nvim_set_keymap(
@@ -38,6 +39,7 @@ return {
 				end,
 			})
 
+			---@diagnostic disable-next-line: missing-fields
 			require("neotest").setup({
 				adapters = {
 					require("neotest-vitest")({
@@ -52,6 +54,7 @@ return {
 							enable_dynamic_test_discovery = true,
 						},
 					}),
+					require("neotest-jest")({}),
 				},
 			})
 		end,
