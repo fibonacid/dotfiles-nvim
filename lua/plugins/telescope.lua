@@ -5,6 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
+		"xiyaowong/telescope-emoji.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -24,6 +25,7 @@ return {
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("lazygit")
+		telescope.load_extension("emoji")
 
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
