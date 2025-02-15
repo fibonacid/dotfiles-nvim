@@ -7,6 +7,7 @@ return {
 			options = {
 				---@usage 'rose-pine' | 'rose-pine-alt'
 				theme = "rose-pine",
+				disabled_filetypes = { "NvimTree", "Avante", "AvanteInput", "AvanteSelectedFiles" },
 			},
 		})
 	end,
