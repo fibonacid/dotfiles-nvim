@@ -6,7 +6,7 @@ return {
 	opts = {
 		-- add any opts here
 		-- for example
-		provider = "openai",
+		provider = "copilot",
 		openai = {
 			api_key_name = "cmd: pass openai_api_key",
 			endpoint = "https://api.openai.com/v1",
