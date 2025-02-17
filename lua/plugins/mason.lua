@@ -44,6 +44,7 @@ return {
 				"stylua", -- lua formatter
 				"ruff", -- python formatter
 				"eslint_d",
+				"biome",
 			},
 		})
 	end,
