@@ -161,6 +161,15 @@ return {
 					},
 				})
 			end,
+			["basedbyright"] = function()
+				-- configure basedpyright server
+				lspconfig["basedpyright"].setup({
+					capabilities = capabilities,
+					settings = {
+						typeCheckingMode = "off",
+					},
+				})
+			end,
 		})
 	end,
 }
