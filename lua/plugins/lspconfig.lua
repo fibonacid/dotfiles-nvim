@@ -165,9 +165,6 @@ return {
 				-- configure basedpyright server
 				lspconfig["basedpyright"].setup({
 					capabilities = capabilities,
-					settings = {
-						typeCheckingMode = "off",
-					},
 				})
 			end,
 		})
