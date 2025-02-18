@@ -161,7 +161,7 @@ return {
 					},
 				})
 			end,
-			["basedbyright"] = function()
+			["basedpyright"] = function()
 				-- configure basedpyright server
 				lspconfig["basedpyright"].setup({
 					capabilities = capabilities,
