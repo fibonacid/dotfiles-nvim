@@ -2,19 +2,102 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"hrsh7th/cmp-nvim-lsp",
-		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- import lspconfig plugin
-		local lspconfig = require("lspconfig")
-
-		-- import mason_lspconfig plugin
+		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
-
-		-- import cmp-nvim-lsp plugin
+		local mason_tool_installer = require("mason-tool-installer")
+		local lspconfig = require("lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+		mason.setup({})
+
+		mason_lspconfig.setup({
+			-- list of servers for mason to install
+			ensure_installed = {
+				"ts_ls",
+				"basedpyright",
+				"html",
+				"cssls",
+				"tailwindcss",
+				"lua_ls",
+				"emmet_ls",
+			},
+			automatic_installation = true,
+		})
+
+		mason_tool_installer.setup({
+			ensure_installed = {
+				"prettier", -- prettier formatter
+				"stylua", -- lua formatter
+				"ruff", -- python formatter
+				"eslint_d",
+				"biome",
+			},
+		})
+
+		-- used to enable autocompletion (assign to every lsp server config)
+		local capabilities = cmp_nvim_lsp.default_capabilities()
+
+		-- setup handlers
+		mason_lspconfig.setup_handlers({
+			-- The first entry (without a key) will be the default handler
+			-- and will be called for each installed server that doesn't have
+			-- a dedicated handler.
+			function(server_name) -- default handler (optional)
+				require("lspconfig")[server_name].setup({
+					capabilities = capabilities,
+				})
+			end,
+			-- Next, you can provide a dedicated handler for specific servers.
+			-- For example, a handler override for the `rust_analyzer`:
+			["lua_ls"] = function()
+				lspconfig["lua_ls"].setup({
+					capabilities = capabilities,
+					settings = {
+						Lua = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+						},
+					},
+				})
+			end,
+			["ts_ls"] = function()
+				local inlayHints = {
+					includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayVariableTypeHints = false,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayEnumMemberValueHints = true,
+				}
+				local preferences = {
+					importModuleSpecifierPreference = "relative",
+					importModuleSpecifierEnding = "minimal",
+				}
+				-- configure ts server
+				lspconfig["ts_ls"].setup({
+					capabilities = capabilities,
+					settings = {
+						typescript = {
+							inlayHints,
+							preferences,
+						},
+						javascript = {
+							inlayHints,
+							preferences,
+						},
+					},
+				})
+			end,
+		})
 
 		local keymap = vim.keymap -- for conciseness
 
@@ -93,79 +176,6 @@ return {
 
 				opts.desc = "Restart LSP"
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-			end,
-		})
-
-		-- used to enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
-
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
-
-		mason_lspconfig.setup_handlers({
-			-- default handler for installed servers
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
-			["lua_ls"] = function()
-				-- configure lua server (with special settings)
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							-- make the language server recognize "vim" global
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				})
-			end,
-			["ts_ls"] = function()
-				local inlayHints = {
-					includeInlayParameterNameHints = "none", -- 'none' | 'literals' | 'all'
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayVariableTypeHints = false,
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-					includeInlayEnumMemberValueHints = true,
-				}
-				local preferences = {
-					importModuleSpecifierPreference = "relative",
-					importModuleSpecifierEnding = "minimal",
-				}
-				-- configure ts server
-				lspconfig["ts_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						typescript = {
-							inlayHints,
-							preferences,
-						},
-						javascript = {
-							inlayHints,
-							preferences,
-						},
-					},
-				})
-			end,
-			["basedpyright"] = function()
-				-- configure basedpyright server
-				lspconfig["basedpyright"].setup({
-					capabilities = capabilities,
-				})
 			end,
 		})
 	end,
