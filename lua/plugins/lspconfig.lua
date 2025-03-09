@@ -5,14 +5,14 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		"hrsh7th/cmp-nvim-lsp",
+		"saghen/blink.cmp",
 	},
 	config = function()
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
 		local mason_tool_installer = require("mason-tool-installer")
 		local lspconfig = require("lspconfig")
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local blink = require("blink.cmp")
 
 		mason.setup({})
 
@@ -41,7 +41,7 @@ return {
 		})
 
 		-- used to enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- setup handlers
 		mason_lspconfig.setup_handlers({
