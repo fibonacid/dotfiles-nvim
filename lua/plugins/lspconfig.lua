@@ -6,13 +6,14 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"saghen/blink.cmp",
+		"someone-stole-my-name/yaml-companion.nvim",
 	},
 	config = function()
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
 		local mason_tool_installer = require("mason-tool-installer")
 		local lspconfig = require("lspconfig")
-		local blink = require("blink.cmp")
+		-- local blink = require("blink.cmp")
 
 		mason.setup({})
 
@@ -26,6 +27,7 @@ return {
 				"tailwindcss",
 				"lua_ls",
 				"emmet_ls",
+				"yamlls",
 			},
 			automatic_installation = true,
 		})
@@ -96,6 +98,15 @@ return {
 						},
 					},
 				})
+			end,
+			["yamlls"] = function()
+				local cfg = require("yaml-companion").setup({
+					-- Add any options here, or leave empty to use the default settings
+					-- lspconfig = {
+					--   cmd = {"yaml-language-server"}
+					-- },
+				})
+				lspconfig["yamlls"].setup(cfg)
 			end,
 		})
 

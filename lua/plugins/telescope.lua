@@ -26,6 +26,7 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("lazygit")
 		telescope.load_extension("emoji")
+		telescope.load_extension("yaml_schema")
 
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
