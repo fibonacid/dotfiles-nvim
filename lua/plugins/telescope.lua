@@ -6,6 +6,8 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
 		"xiyaowong/telescope-emoji.nvim",
+		"jvgrootveld/telescope-zoxide",
+		"nvim-tree/nvim-tree.lua",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -21,12 +23,37 @@ return {
 					},
 				},
 			},
+			-- (other Telescope configuration...)
+			extensions = {
+				zoxide = {
+					prompt_title = "[ Walking on the shoulders of TJ ]",
+					mappings = {
+						default = {
+							after_action = function(selection)
+								vim.notify("Directory changed to " .. selection.path)
+								require("nvim-tree.api").tree.reload()
+							end,
+						},
+						-- ["<C-s>"] = {
+						-- 	before_action = function(selection)
+						-- 		print("before C-s")
+						-- 	end,
+						-- 	action = function(selection)
+						-- 		vim.cmd.edit(selection.path)
+						-- 	end,
+						-- },
+						-- Opens the selected entry in a new split
+						-- ["<C-q>"] = { action = z_utils.create_basic_command("split") },
+					},
+				},
+			},
 		})
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("lazygit")
 		telescope.load_extension("emoji")
 		telescope.load_extension("yaml_schema")
+		telescope.load_extension("zoxide")
 
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
@@ -47,5 +74,6 @@ return {
 			"<cmd>Telescope git_bcommits<cr>",
 			{ desc = "Fuzzy find git commits for buffer" }
 		)
+		keymap.set("n", "<leader>fz", "<cmd>Telescope zoxide list<cr>", { desc = "Fuzzy find zoxide locations" })
 	end,
 }
