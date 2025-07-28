@@ -1,3 +1,4 @@
+-- Basic Options
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.swapfile = false
@@ -6,23 +7,27 @@ vim.o.tabstop = 2
 vim.g.mapleader = " "
 vim.o.signcolumn = "yes"
 
-
+-- Basic Keymaps
 vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>")
 vim.keymap.set("n", "<leader>w", ":write<CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
 
+-- Plugins
 vim.pack.add({
 	{ src = "https://github.com/rose-pine/neovim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
-	{ src = "https://github.com/christoomey/vim-tmux-navigator" }
+	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
+	{ src = "https://github.com/kdheepak/lazygit.nvim" }
 })
 
+-- Theming
 vim.cmd("colorscheme rose-pine-moon")
 vim.cmd(":hi statusline guibg=NONE")
 
+-- Language Servers
 vim.lsp.enable({
 	"lua_ls",
 	"ts_ls",
@@ -31,12 +36,17 @@ vim.lsp.enable({
 
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
+-- Oil
 require("oil").setup()
 vim.keymap.set("n", "<leader>e", ":Oil<CR>")
 
+-- Telescope
 require("telescope").setup()
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>")
 vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>")
 vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>")
+
+-- LazyGit
+vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>")
 
 
