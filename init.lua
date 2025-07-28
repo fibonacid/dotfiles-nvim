@@ -11,6 +11,10 @@ vim.o.signcolumn = "yes"
 vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>", { desc = "Save and reload config" })
 vim.keymap.set("n", "<leader>w", ":write<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", "<leader>t", ":tabnew<CR>", { desc = "Open new tab" })
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { desc = "Split vertically" })
+vim.keymap.set("n", "<leader>c", ":hsplit<CR>", { desc = "Split horizontally" })
 
 -- Plugins
 vim.pack.add({
