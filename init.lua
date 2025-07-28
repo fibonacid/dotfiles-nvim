@@ -53,8 +53,14 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "List available code actions" })
 
 -- Oil
-require("oil").setup()
-vim.keymap.set("n", "<leader>e", ":Oil<CR>", { desc = "Explore files" })
+require("oil").setup({
+	view_options = {
+		show_hidden = true,
+	},
+})
+
+vim.keymap.set("n", "<leader>ee", ":Oil <CR>", { desc = "Explore files" })
+vim.keymap.set("n", "<leader>ef", ":Oil --float<CR>", { desc = "Explore in float" })
 
 -- Telescope
 require("telescope").setup()
