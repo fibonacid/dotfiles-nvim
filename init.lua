@@ -8,9 +8,9 @@ vim.g.mapleader = " "
 vim.o.signcolumn = "yes"
 
 -- Basic Keymaps
-vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>")
-vim.keymap.set("n", "<leader>w", ":write<CR>")
-vim.keymap.set("n", "<leader>q", ":quit<CR>")
+vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>", { desc = "Save and reload config" })
+vim.keymap.set("n", "<leader>w", ":write<CR>", { desc = "Save" })
+vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit" })
 
 -- Plugins
 vim.pack.add({
@@ -20,7 +20,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
-	{ src = "https://github.com/kdheepak/lazygit.nvim" }
+	{ src = "https://github.com/kdheepak/lazygit.nvim" },
+	{ src = "https://github.com/folke/which-key.nvim" }
 })
 
 -- Theming
@@ -38,15 +39,13 @@ vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
 -- Oil
 require("oil").setup()
-vim.keymap.set("n", "<leader>e", ":Oil<CR>")
+vim.keymap.set("n", "<leader>e", ":Oil<CR>", { desc = "Explore files" })
 
 -- Telescope
 require("telescope").setup()
-vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>")
-vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>")
-vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>")
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find by file name" })
+vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Find by string" })
+vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>", { desc = "Find errors in buffer" })
 
 -- LazyGit
 vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>")
-
-
