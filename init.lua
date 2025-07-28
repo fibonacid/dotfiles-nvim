@@ -14,9 +14,10 @@ vim.keymap.set("n", "<leader>q", ":quit<CR>")
 vim.pack.add({
 	{ src = "https://github.com/rose-pine/neovim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/stevearc/oil.nvim" }
+	{ src = "https://github.com/stevearc/oil.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" }
 })
-
 
 vim.cmd("colorscheme rose-pine-moon")
 vim.cmd(":hi statusline guibg=NONE")
@@ -31,5 +32,10 @@ vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
 require("oil").setup()
 vim.keymap.set("n", "<leader>e", ":Oil<CR>")
+
+require("telescope").setup()
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>")
+vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>")
+vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>")
 
 
