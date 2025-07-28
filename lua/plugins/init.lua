@@ -1,9 +1,0 @@
-return {
-	{
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
-		"github/copilot.vim",
-		"ThePrimeagen/vim-be-good",
-	},
-}
