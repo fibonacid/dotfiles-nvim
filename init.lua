@@ -51,6 +51,7 @@ vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to defini
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Go to references" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostics for line" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "List available code actions" })
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- Oil
 require("oil").setup({
