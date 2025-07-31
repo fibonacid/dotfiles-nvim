@@ -20,11 +20,11 @@ vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { desc = "Split vertically" })
 vim.keymap.set("n", "<leader>c", ":hsplit<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "<leader>sc", ":close<CR>", { desc = "Close vertical split" })
 
 -- Plugins
 vim.pack.add({
 	{ src = "https://github.com/rose-pine/neovim" },
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/github/copilot.vim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -42,7 +42,10 @@ vim.cmd(":hi statusline guibg=NONE")
 vim.lsp.enable({
 	"lua_ls",
 	"ts_ls",
-	"basedpyright"
+	"ruff",
+	"basedpyright",
+	"bashls",
+	"yamlls",
 })
 
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
@@ -103,6 +106,17 @@ vim.lsp.config('lua_ls', {
 		Lua = {}
 	}
 })
+
+-- Use the `:LspTypescriptSourceAction` command to see "whole file" ("source") code-actions such as:
+vim.lsp.config('ts_ls', {
+	on_attach = function(client, bufnr)
+		if client.name == "ts_ls" then
+			vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = bufnr, desc = "Format file" })
+			vim.keymap.set("n", "<leader>li", ":LspTypescriptSourceAction<CR>", { buffer = bufnr, desc = "Source action" })
+		end
+	end,
+})
+
 
 -- Oil
 require("oil").setup({
