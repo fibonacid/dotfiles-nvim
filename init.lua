@@ -6,6 +6,7 @@ vim.o.wrap = false
 vim.o.tabstop = 2
 vim.g.mapleader = " "
 vim.o.signcolumn = "yes"
+vim.o.winborder = "rounded"
 
 -- Basic Keymaps
 vim.keymap.set("n", "<leader>o", ":update<CR> :source<CR>", { desc = "Save and reload config" })
