@@ -32,12 +32,18 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
-	{ src = "https://github.com/folke/which-key.nvim" }
+	{ src = "https://github.com/folke/which-key.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 })
 
 -- Theming
 vim.cmd("colorscheme rose-pine-moon")
 vim.cmd(":hi statusline guibg=NONE")
+
+require 'nvim-treesitter.configs'.setup {
+	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "bash", "python", "javascript", "typescript", "json", "yaml" },
+}
 
 -- Language Servers
 vim.lsp.enable({
@@ -48,7 +54,7 @@ vim.lsp.enable({
 	"bashls",
 	"yamlls",
 })
-
+--
 --
 -- Auto Complete
 -- Works best with completeopt=noselect.
