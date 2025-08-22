@@ -57,6 +57,7 @@ vim.lsp.enable({
 	"rust_analyzer",
 	"gopls",
 	"arduino_language_server",
+	"clangd",
 })
 --
 --
