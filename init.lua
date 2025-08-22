@@ -44,7 +44,7 @@ vim.cmd(":hi statusline guibg=NONE")
 -- Tree Sitter
 require 'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "bash", "python", "javascript", "typescript", "json", "yaml", "go", "rust" },
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "bash", "python", "javascript", "typescript", "json", "yaml", "go", "rust", "arduino" },
 }
 
 -- Language Servers
