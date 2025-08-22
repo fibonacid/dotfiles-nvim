@@ -77,7 +77,9 @@ return {
 		on_dir(util.root_pattern('*.ino')(fname))
 	end,
 	cmd = {
-		'arduino-language-server --cli-config /Users/lorenzo/Library/Arduino15/arduino-cli.yaml',
+		'arduino-language-server',
+		'--cli-config',
+		'/Users/lorenzo/Library/Arduino15/arduino-cli.yaml',
 	},
 	capabilities = {
 		textDocument = {
