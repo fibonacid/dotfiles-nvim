@@ -78,8 +78,10 @@ return {
 	end,
 	cmd = {
 		'arduino-language-server',
-		'--cli-config',
-		'/Users/lorenzo/Library/Arduino15/arduino-cli.yaml',
+		'-clangd', 'clangd',
+		'-cli', 'arduino-cli',
+		'-cli-config', vim.fn.expand('~/.arduino15/arduino-cli.yaml'),
+		'-fqbn', 'esp32:esp32:esp32',
 	},
 	capabilities = {
 		textDocument = {
