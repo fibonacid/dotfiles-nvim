@@ -85,14 +85,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		-- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
 		if client:supports_method('textDocument/completion') then
-			print('Enabling autocompletion for ' .. client.name)
 			-- Optional: trigger autocompletion on EVERY keypress. May be slow!
 			-- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
 			-- client.server_capabilities.completionProvider.triggerCharacters = chars
 
 			vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
 		end
-		print('LSP client attached: ' .. client.name)
+		vim.notify('LSP client attached: ' .. client.name, vim.log.levels.INFO)
 
 		-- Auto-format ("lint") on save.
 		-- Usually not needed if server supports "textDocument/willSaveWaitUntil".
