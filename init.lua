@@ -27,6 +27,7 @@ vim.keymap.set("n", "<leader>sc", ":close<CR>", { desc = "Close vertical split" 
 vim.pack.add({
 	{ src = "https://github.com/rose-pine/neovim" },
 	{ src = "https://github.com/github/copilot.vim" },
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
@@ -184,6 +185,9 @@ vim.lsp.config('ts_ls', {
 require("oil").setup({
 	view_options = {
 		show_hidden = true,
+	},
+	columns = {
+		"icon",
 	},
 	keymaps = {
 		["<C-v>"] = { "actions.select", opts = { vertical = true } }
