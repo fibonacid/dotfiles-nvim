@@ -91,6 +91,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 			vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
 		end
+
 		vim.notify('LSP client attached: ' .. client.name, vim.log.levels.INFO)
 
 		-- Auto-format ("lint") on save.
@@ -184,6 +185,9 @@ require("oil").setup({
 	view_options = {
 		show_hidden = true,
 	},
+	keymaps = {
+		["<C-v>"] = { "actions.select", opts = { vertical = true } }
+	}
 })
 
 vim.keymap.set("n", "<leader>ee", ":Oil <CR>", { desc = "Explore files" })
