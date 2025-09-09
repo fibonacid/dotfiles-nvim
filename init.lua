@@ -73,6 +73,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 		if client:supports_method('textDocument/implementation') then
 			-- Create a keymap for vim.lsp.buf.implementation ...
+			vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
+				{ buffer = args.buf, desc = "Go to implementation" })
+		end
+
+		if client:supports_method('textDocument/definition') then
+			-- Create a keymap for vim.lsp.buf.definition ...
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition,
+				{ buffer = args.buf, desc = "Go to definition" })
 		end
 
 		-- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
@@ -186,6 +194,7 @@ vim.keymap.set("n", "<leader>ef", ":Oil --float<CR>", { desc = "Explore in float
 require("telescope").setup()
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find by file name" })
 vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Find by string" })
+vim.keymap.set("n", "<leader>fg", ":Telescope git_status<CR>", { desc = "Find git status files" })
 vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>", { desc = "Find errors in buffer" })
 
 -- LazyGit
