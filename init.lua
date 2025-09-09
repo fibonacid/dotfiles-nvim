@@ -58,6 +58,7 @@ vim.lsp.enable({
 	"gopls",
 	"arduino_language_server",
 	"clangd",
+	"tailwindcss",
 })
 --
 --
