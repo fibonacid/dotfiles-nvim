@@ -31,6 +31,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/jvgrootveld/telescope-zoxide" },
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 	{ src = "https://github.com/folke/which-key.nvim" },
@@ -199,10 +200,15 @@ vim.keymap.set("n", "<leader>ef", ":Oil --float<CR>", { desc = "Explore in float
 
 -- Telescope
 require("telescope").setup()
+
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find by file name" })
 vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Find by string" })
 vim.keymap.set("n", "<leader>fg", ":Telescope git_status<CR>", { desc = "Find git status files" })
 vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>", { desc = "Find errors in buffer" })
+
+require("telescope").load_extension('zoxide')
+vim.keymap.set("n", "<leader>fz", ":Telescope zoxide list<CR>", { desc = "Open zoxide list" })
+
 
 -- LazyGit
 vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>")
