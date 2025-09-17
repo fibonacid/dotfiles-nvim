@@ -36,6 +36,7 @@ vim.pack.add({
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/stevearc/conform.nvim" }
 })
 
 -- Theming
@@ -52,6 +53,7 @@ require 'nvim-treesitter.configs'.setup {
 vim.lsp.enable({
 	"lua_ls",
 	"ts_ls",
+	"jsonls",
 	"ruff",
 	"basedpyright",
 	"bashls",
@@ -62,12 +64,21 @@ vim.lsp.enable({
 	"clangd",
 	"tailwindcss",
 })
---
+
 --
 -- Auto Complete
 -- Works best with completeopt=noselect.
 -- Use CTRL-Y to select an item. |complete_CTRL-Y|
 vim.cmd [[set completeopt+=menuone,noselect,popup]]
+
+-- Conform
+require("conform").setup({
+	log_level = vim.log.levels.DEBUG,
+	formatters_by_ft = {
+		javascript = { "prettierd", "prettier", stop_after_first = true },
+		typescript = { "prettierd", "prettier", stop_after_first = true },
+	}
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -104,7 +115,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 				group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
 				buffer = args.buf,
 				callback = function()
-					vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+					-- vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+					require("conform").format({ bufnr = args.buf })
 				end,
 			})
 		end
