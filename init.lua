@@ -123,7 +123,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format current buffer" })
 vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Go to references" })
