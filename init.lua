@@ -36,8 +36,15 @@ vim.pack.add({
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/stevearc/conform.nvim" }
+	{ src = "https://github.com/stevearc/conform.nvim" },
+	-- Testing
+	{ src = "https://github.com/nvim-neotest/neotest" },
+	{ src = "https://github.com/nvim-neotest/nvim-nio" },
+	{ src = "https://github.com/antoinemadec/FixCursorHold.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/thenbe/neotest-playwright" }
 })
+
 
 -- Theming
 vim.cmd("colorscheme rose-pine-moon")
@@ -221,6 +228,26 @@ vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>", { desc = "Find er
 require("telescope").load_extension('zoxide')
 vim.keymap.set("n", "<leader>fz", ":Telescope zoxide list<CR>", { desc = "Open zoxide list" })
 
-
 -- LazyGit
 vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>")
+
+-- Neotest
+local neotest = require('neotest')
+neotest.setup({
+	adapters = {
+		require('neotest-playwright').adapter({
+			options = {
+				persist_project_selection = true,
+				enable_dynamic_test_discovery = true,
+			},
+		}),
+	},
+})
+
+vim.keymap.set("n", "<leader>ttr", function() neotest.run.run() end, { desc = "Run nearest test" })
+vim.keymap.set("n", "<leader>ttf", function() neotest.run.run(vim.fn.expand("%")) end,
+	{ desc = "Run tests in current file" })
+vim.keymap.set("n", "<leader>tts", function() neotest.summary.toggle() end, { desc = "Toggle test summary" })
+vim.keymap.set("n", "<leader>tto", function() neotest.output.open({ enter = true }) end,
+	{ desc = "Open test output" })
+
