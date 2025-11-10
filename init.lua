@@ -60,6 +60,7 @@ require 'nvim-treesitter.configs'.setup {
 vim.lsp.enable({
 	"lua_ls",
 	"ts_ls",
+	"eslint",
 	"jsonls",
 	"ruff",
 	"basedpyright",
