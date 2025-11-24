@@ -201,11 +201,36 @@ vim.lsp.config('ts_ls', {
 	end,
 })
 
+local git_utils = require"git_utils"
+local git_status = git_utils.new_git_status()
+
+-- Clear git status cache on refresh
+local refresh = require("oil.actions").refresh
+local orig_refresh = refresh.callback
+refresh.callback = function(...)
+	git_status = git_utils.new_git_status()
+	orig_refresh(...)
+end
 
 -- Oil
 require("oil").setup({
 	view_options = {
 		show_hidden = true,
+		is_hidden_file = function(name, bufnr)
+			local dir = require("oil").get_current_dir(bufnr)
+			local is_dotfile = vim.startswith(name, ".") and name ~= ".."
+			-- if no local directory (e.g. for ssh connections), just hide dotfiles
+			if not dir then
+				return is_dotfile
+			end
+			-- dotfiles are considered hidden unless tracked
+			if is_dotfile then
+				return not git_status[dir].tracked[name]
+			else
+				-- Check if file is gitignored
+				return git_status[dir].ignored[name]
+			end
+		end,
 	},
 	columns = {
 		"icon",
@@ -251,4 +276,3 @@ vim.keymap.set("n", "<leader>ttf", function() neotest.run.run(vim.fn.expand("%")
 vim.keymap.set("n", "<leader>tts", function() neotest.summary.toggle() end, { desc = "Toggle test summary" })
 vim.keymap.set("n", "<leader>tto", function() neotest.output.open({ enter = true }) end,
 	{ desc = "Open test output" })
-
