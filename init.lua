@@ -201,7 +201,7 @@ vim.lsp.config('ts_ls', {
 	end,
 })
 
-local git_utils = require"git_utils"
+local git_utils = require "git_utils"
 local git_status = git_utils.new_git_status()
 
 -- Clear git status cache on refresh
@@ -250,6 +250,7 @@ vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find by
 vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Find by string" })
 vim.keymap.set("n", "<leader>fg", ":Telescope git_status<CR>", { desc = "Find git status files" })
 vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>", { desc = "Find errors in buffer" })
+vim.keymap.set({ "n", "v" }, "<leader>fc", ":Telescope grep_string<CR>", { desc = "Find string under cursor" })
 
 require("telescope").load_extension('zoxide')
 vim.keymap.set("n", "<leader>fz", ":Telescope zoxide list<CR>", { desc = "Open zoxide list" })
