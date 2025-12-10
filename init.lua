@@ -26,7 +26,7 @@ vim.keymap.set("n", "<leader>sc", ":close<CR>", { desc = "Close vertical split" 
 -- Plugins
 vim.pack.add({
 	{ src = "https://github.com/rose-pine/neovim" },
-	{ src = "https://github.com/github/copilot.vim" },
+	-- { src = "https://github.com/github/copilot.vim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
