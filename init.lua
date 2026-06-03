@@ -35,6 +35,7 @@ vim.pack.add({
 	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/kdheepak/lazygit.nvim" }
 })
 
 -- Theming
@@ -42,7 +43,25 @@ vim.cmd("colorscheme rose-pine-moon")
 vim.cmd(":hi statusline guibg=NONE")
 
 -- -- Tree Sitter
-require('nvim-treesitter').install { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "bash", "python", "javascript", "jsdoc", "typescript", "json", "yaml", "go", "rust", "arduino" }
+require('nvim-treesitter').install {
+	"c",
+	"lua",
+	"vim",
+	"vimdoc",
+	"query",
+	"markdown",
+	"markdown_inline",
+	"bash",
+	"python",
+	"javascript",
+	"jsdoc",
+	"typescript",
+	"json",
+	"yaml",
+	"go",
+	"rust",
+	"arduino"
+}
 
 -- Language Servers
 vim.lsp.enable({
@@ -74,6 +93,10 @@ require("conform").setup({
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 	}
 })
+
+-- Lazygit
+vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", { desc = "Open LazyGit" })
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -238,4 +261,3 @@ vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Find by 
 vim.keymap.set("n", "<leader>fg", ":Telescope git_status<CR>", { desc = "Find git status files" })
 vim.keymap.set("n", "<leader>D", ":Telescope diagnostics<CR>", { desc = "Find errors in buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>fc", ":Telescope grep_string<CR>", { desc = "Find string under cursor" })
-
