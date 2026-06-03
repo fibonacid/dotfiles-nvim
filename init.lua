@@ -69,7 +69,6 @@ vim.cmd [[set completeopt+=menuone,noselect,popup]]
 
 -- Conform
 require("conform").setup({
-	log_level = vim.log.levels.DEBUG,
 	formatters_by_ft = {
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
